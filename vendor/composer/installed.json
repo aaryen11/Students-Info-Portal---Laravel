@@ -5449,7 +5449,7 @@
                 ]
             }
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-0": {
                 "Snowfire\\Beautymail\\": "src/"
