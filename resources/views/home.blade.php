@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<link href="{{ secure-asset('css/home.css') }}" rel="stylesheet">
+<link href="{{ secure_asset('css/home.css') }}" rel="stylesheet">
 
 <div class="wrapper">
 <div class="profile-card js-profile-card">

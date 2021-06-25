@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-	<link rel="stylesheet" type="text/css" href="{{ secure-asset('css/select/select2.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ secure-asset('css/main.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ secure_asset('css/select/select2.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ secure_asset('css/main.css') }}">
 	<div class="container-contact100">
 		<div class="wrap-contact100">
 			<form class="contact100-form validate-form" action="/save" method="POST">
@@ -63,8 +63,8 @@
 
 
 	<div id="dropDownSelect1"></div>
-	<script src="{{ secure-asset('js/jquery-3.2.1.min.js') }}"></script>
-	<script src="{{ secure-asset('css/select/select2.min.js') }}"></script>
+	<script src="{{ secure_asset('js/jquery-3.2.1.min.js') }}"></script>
+	<script src="{{ secure_asset('css/select/select2.min.js') }}"></script>
 	<script>
 		$(".selection-2").select2({
 			minimumResultsForSearch: 20,

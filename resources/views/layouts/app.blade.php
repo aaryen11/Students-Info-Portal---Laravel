@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Demand Register') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ secure-asset('js/app.js') }}" defer></script>
+    <script src="{{ secure_asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,7 +18,7 @@
     
 
     <!-- Styles -->
-    <link href="{{ secure-asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
