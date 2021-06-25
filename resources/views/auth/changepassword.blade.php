@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<link href="{{ asset('css/login.css') }}" rel="stylesheet">
+<link href="{{ secure-asset('css/login.css') }}" rel="stylesheet">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card pt-3"  style="border-radius:10px 10px 10px 10px; opacity:0.85; display:inline-block; margin-top:11%;">
             <div class="card-body">
-                <img src="{{ asset('logo.gif') }}" style='width:100%;height:20%'>
+                <img src="{{ secure-asset('logo.gif') }}" style='width:100%;height:20%'>
                 </div>
 
                 <div class="card-body">
