@@ -53,9 +53,9 @@
                         </div>
 
                         <div class="form-group row">
-                        <label for="course" class="col-md-4 col-form-label text-md-right">{{ __('course') }}</label>
+                        <label for="course" class="col-md-4 col-form-label text-md-right">{{ __('Course') }}</label>
                         <div class="col-md-6">
-                                <input id="course" type="text" class="form-control @error('course') is-invalid @enderror" name="course" value="{{ old('course') }}" autocomplete="course" autofocus>
+                                <input id="course" type="text" class="form-control @error('course') is-invalid @enderror" name="course" >
 
                                 @error('course')
                                     <span class="invalid-feedback" role="alert">
@@ -66,9 +66,9 @@
                         </div>
 
                         <div class="form-group row">
-                        <label for="branch" class="col-md-4 col-form-label text-md-right">{{ __('branch') }}</label>
+                        <label for="branch" class="col-md-4 col-form-label text-md-right">{{ __('Branch') }}</label>
                         <div class="col-md-6">
-                                <input id="branch" type="text" class="form-control @error('branch') is-invalid @enderror" name="branch" value="{{ old('branch') }}" autocomplete="branch" autofocus>
+                                <input id="branch" type="text" class="form-control @error('branch') is-invalid @enderror" name="branch" >
 
                                 @error('branch')
                                     <span class="invalid-feedback" role="alert">
@@ -79,9 +79,9 @@
                         </div>
 
                         <div class="form-group row">
-                        <label for="section" class="col-md-4 col-form-label text-md-right">{{ __('section') }}</label>
+                        <label for="section" class="col-md-4 col-form-label text-md-right">{{ __('Section') }}</label>
                         <div class="col-md-6">
-                                <input id="section" type="text" class="form-control @error('section') is-invalid @enderror" name="section" value="{{ old('section') }}" autocomplete="section" autofocus>
+                                <input id="section" type="text" class="form-control @error('section') is-invalid @enderror" name="section" >
 
                                 @error('section')
                                     <span class="invalid-feedback" role="alert">
