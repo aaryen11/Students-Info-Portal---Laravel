@@ -26,7 +26,17 @@
       </div><br>
       <div class="profile-card-loc">
         <span class="profile-card-loc__txt">
+            Official Email : {{Auth::user()->official_email_id}}
+        </span>
+      </div><br>
+      <div class="profile-card-loc">
+        <span class="profile-card-loc__txt">
             Section : {{Auth::user()->section}}
+        </span>
+      </div><br>
+      <div class="profile-card-loc">
+        <span class="profile-card-loc__txt">
+            Group : {{Auth::user()->group}}
         </span>
       </div><br>
       <div class="profile-card-loc">

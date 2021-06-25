@@ -30,6 +30,12 @@
 				</div>
 
 				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Official Email</span>
+					<input class="input100" type="text" name="oemail" value="{{(Auth::user()->official_email_id)}}" required>
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input">
 					<span class="label-input100">Contact No.</span>
 					<input class="input100" type="text" name="phone" value="{{(Auth::user()->phone)}}" required>
 					<span class="focus-input100"></span>
