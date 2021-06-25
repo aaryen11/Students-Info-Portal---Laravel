@@ -163,6 +163,11 @@ class HomeController extends Controller
 
     public function export()   
     {  
-        return Excel::download(new UsersExport, 'students.xlsx');  
+        if(Auth::user()->usertype == 1) {
+            return Excel::download(new UsersExport, 'students.xlsx');
+        }
+        else{
+            return response(abort(403,''));
+        }  
     }  
 }
