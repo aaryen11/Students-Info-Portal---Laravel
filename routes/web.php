@@ -18,7 +18,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Auth::routes();
+Auth::routes([
+    'register' => false,
+    'verify' => true,
+    'reset' => false
+  ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/changePassword','HomeController@ChangePasswordview');
