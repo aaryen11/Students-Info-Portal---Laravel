@@ -120,7 +120,6 @@ class HomeController extends Controller
                $email = $data['email'];
                $university = $data['university'];
                $section = $data['section'];
-               $oemail = $data['oemail'];
                $group = $data['group'];
                     $studentdata= User::firstOrNew(['email'=>$email]);
                     $studentdata->name=$name;
@@ -128,7 +127,6 @@ class HomeController extends Controller
                     $studentdata->university=$university;
                     $studentdata->section=$section;
                     $studentdata->group=$group;
-                    $studentdata->official_email_id=$oemail;
                     $studentdata->usertype='2';
                     $studentdata->password= Hash::make($email);
                     $studentdata->save();
@@ -155,6 +153,7 @@ class HomeController extends Controller
         $data = [
          'name' => $request->get('name'),
          'email' => $request->get('email'),
+         'official_email_id' => $request->get('oemail'),
          'course' => $request->get('course'),
          'branch' => $request->get('branch'),
          'phone' => $request->get('phone'),
