@@ -120,11 +120,13 @@ class HomeController extends Controller
                $email = $data['email'];
                $university = $data['university'];
                $section = $data['section'];
+               $group = $data['group'];
                     $studentdata= User::firstOrNew(['email'=>$email]);
                     $studentdata->name=$name;
                     $studentdata->email=$email;
                     $studentdata->university=$university;
                     $studentdata->section=$section;
+                    $studentdata->group=$group;
                     $studentdata->usertype='2';
                     $studentdata->password= Hash::make($email);
                     $studentdata->save();
@@ -133,7 +135,7 @@ class HomeController extends Controller
             }
             else{
                 echo "<script> alert('Error : CSV File Type Required');</script>";
-                return view("addcsv");
+                return redirect()->back();
             }
         }
 

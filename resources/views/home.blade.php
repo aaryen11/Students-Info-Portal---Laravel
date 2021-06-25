@@ -52,6 +52,9 @@
         <div class="profile-card-inf__item">
         <div class="profile-card-inf__txt"><a href="/download"><button class="btn btn-danger">Download Student Records</button></a></div>
         </div>
+        <div class="profile-card-inf__item">
+        <div class="profile-card-inf__txt"><a href="#"><button class="btn btn-danger" disabled>Delete Records</button></a></div>
+        </div>
         @endif
 
         @if((Auth::user()->usertype) == '1'||(Auth::user()->usertype) == '2')
