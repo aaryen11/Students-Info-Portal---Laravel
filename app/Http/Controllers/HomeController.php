@@ -172,5 +172,35 @@ class HomeController extends Controller
         else{
             return response(abort(403,''));
         }  
-    }  
+    }
+    
+    public function table()
+    {
+        $users = DB::table("users")->simplepaginate(10);
+        return view('records',compact('users'));
+    }
+
+        /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+    	DB::table("users")->delete($id);
+    	return response()->json(['success'=>"Record Deleted successfully.", 'tr'=>'tr_'.$id]);
+    }
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        DB::table("users")->whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['success'=>"Records Deleted successfully."]);
+    }
 }

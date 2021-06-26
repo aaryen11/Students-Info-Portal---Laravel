@@ -6,14 +6,14 @@
 <body>
 @extends('layouts.app')
 @section('content')
-<link href="{{ secure_asset('css/login.css') }}" rel="stylesheet">
+<link href="{{ asset('css/login.css') }}" rel="stylesheet">
 <body>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8" style="padding-top:10%;padding-bottom:17%">
             <div class="card"  style="border-radius:10px 10px 10px; opacity:0.85; display:inline-block;margin:3%;">
                 <div class="card-body">
-                <img src="{{ secure_asset('logo.gif') }}" style='width:100%;height:20%'>
+                <img src="{{ asset('logo.gif') }}" style='width:100%;height:20%'>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

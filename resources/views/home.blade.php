@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<link href="{{ secure_asset('css/home.css') }}" rel="stylesheet">
+<link href="{{ asset('css/home.css') }}" rel="stylesheet">
 
 <div class="wrapper">
 <div class="profile-card js-profile-card">
@@ -63,7 +63,7 @@
         <div class="profile-card-inf__txt"><a href="/download"><button class="btn btn-danger">Download Student Records</button></a></div>
         </div>
         <div class="profile-card-inf__item">
-        <div class="profile-card-inf__txt"><a href="#"><button class="btn btn-danger" disabled>Delete Records</button></a></div>
+        <div class="profile-card-inf__txt"><a href="/delete"><button class="btn btn-danger">Delete Records</button></a></div>
         </div>
         @endif
 

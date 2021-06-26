@@ -76,7 +76,7 @@ Then make sure to include your scripts in your blade layout. Remove the `defer` 
 <html lang="en">
   <head>
     <!-- Scripts -->
-    <script src="{{ secure_asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
   </head>
   <body>
     @include('sweet::alert')

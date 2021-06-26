@@ -709,14 +709,14 @@ if (! function_exists('route')) {
     }
 }
 
-if (! function_exists('secure_asset')) {
+if (! function_exists('asset')) {
     /**
      * Generate an asset path for the application.
      *
      * @param  string  $path
      * @return string
      */
-    function secure_asset($path)
+    function asset($path)
     {
         return asset($path, true);
     }
