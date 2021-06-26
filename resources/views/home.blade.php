@@ -63,7 +63,7 @@
         <div class="profile-card-inf__txt"><a href="/download"><button class="btn btn-danger">Download Student Records</button></a></div>
         </div>
         <div class="profile-card-inf__item">
-        <div class="profile-card-inf__txt"><a href="/delete"><button class="btn btn-danger">Delete Records</button></a></div>
+        <div class="profile-card-inf__txt"><a href="/users"><button class="btn btn-danger">Delete Records</button></a></div>
         </div>
         @endif
 

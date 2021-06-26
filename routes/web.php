@@ -34,8 +34,10 @@ Route::post('/upload', 'HomeController@upload');
 Route::get('/edit', 'HomeController@editprofile');
 Route::post('/save', 'HomeController@update');
 Route::get('/download', 'HomeController@export');
-Route::get('/delete', 'HomeController@table');
-Route::delete('delete/{id}', 'HomeController@destroy');
-Route::delete('userDeleteAll', 'HomeController@deleteAll');
-Route::get('/records/srech', 'HomeController@search')->name('search');
+//Route::get('/delete', 'HomeController@table');
+Route::get('users/{id}', ['uses'=>'HomeController@destroy', 'as'=>'users.user_id']);
+//Route::delete('userDeleteAll', 'HomeController@deleteAll');
+//Route::get('/records/srech', 'HomeController@search')->name('search');
+
+Route::get('users', ['uses'=>'HomeController@usertable', 'as'=>'users.usertable']);
 

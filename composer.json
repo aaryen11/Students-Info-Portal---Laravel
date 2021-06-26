@@ -18,7 +18,8 @@
         "laravelcollective/html": "^6.2",
         "maatwebsite/excel": "^3.1",
         "snowfire/beautymail": "dev-master",
-        "uxweb/sweet-alert": "^2.0"
+        "uxweb/sweet-alert": "^2.0",
+        "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

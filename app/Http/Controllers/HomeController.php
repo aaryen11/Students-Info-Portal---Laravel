@@ -10,7 +10,7 @@ use Validator;
 use App\Models\User;
 use App\Exports\UsersExport;  
 use Maatwebsite\Excel\Facades\Excel; 
-
+use DataTables;
 
 class HomeController extends Controller
 {
@@ -212,5 +212,22 @@ class HomeController extends Controller
         }
         $users = $users->paginate(10);
         return view('records', compact('users'));
+    }
+
+    public function usertable(Request $request)
+    {
+        if($request->ajax())
+        {
+            $data = User::latest()->get();
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($data){
+                        $button = '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                        return $button;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        return view('users');
     }
 }
