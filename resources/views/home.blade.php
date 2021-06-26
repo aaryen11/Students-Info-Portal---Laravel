@@ -3,8 +3,8 @@
 @section('content')
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
 
-<div class="wrapper">
-<div class="profile-card js-profile-card">
+<div class="wrapper" style="padding-top:3%">
+<div class="profile-card js-profile-card ">
     <div class="profile-card__cnt js-profile-cnt">
       <div class="profile-card__name">{{(Auth::user()->name)}}</div><br>
       <div class="profile-card__txt">{{(Auth::user()->department)}}</strong></div><br>
