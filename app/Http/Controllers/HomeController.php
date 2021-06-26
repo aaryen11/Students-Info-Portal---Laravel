@@ -187,8 +187,14 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-    	DB::table("users")->delete($id);
+    	
+        if(Auth::user()->usertype == 1) {
+        DB::table("users")->delete($id);
     	return response()->json(['success'=>"Record Deleted successfully.", 'tr'=>'tr_'.$id]);
+        }
+        else{
+            return response(abort(403,''));
+        }
     }
 
 
@@ -216,6 +222,7 @@ class HomeController extends Controller
 
     public function usertable(Request $request)
     {
+        if(Auth::user()->usertype == 1) {
         if($request->ajax())
         {
             $data = User::latest()->get();
@@ -229,5 +236,10 @@ class HomeController extends Controller
                     ->make(true);
         }
         return view('users');
+        }
+        else{
+            return response(abort(403,''));
+        }
+
     }
 }
