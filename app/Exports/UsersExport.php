@@ -21,6 +21,7 @@ class UsersExport implements FromCollection, WithHeadings
             'S.No',
             'Name',
             'Email',
+            'Email_Verified_At',
             'Official Mail',
             'Phone',
             'Course',
