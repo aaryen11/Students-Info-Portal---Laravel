@@ -203,4 +203,14 @@ class HomeController extends Controller
         DB::table("users")->whereIn('id',explode(",",$ids))->delete();
         return response()->json(['success'=>"Records Deleted successfully."]);
     }
+
+    public function search(Request $request)
+    {
+        $users = DB::table('users');
+        if( $request->input('search')){
+            $users = $users->where('name', 'LIKE', "%" . $request->search . "%");
+        }
+        $users = $users->paginate(10);
+        return view('records', compact('users'));
+    }
 }

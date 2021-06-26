@@ -17,6 +17,10 @@
     <h3>Student Records</h3>
     <button style="margin-bottom: 10px" class="btn btn-primary delete_all" data-url="{{ url('userDeleteAll') }}">Delete All Selected</button>
     <a href="/home"><button style="margin-bottom: 10px; float:right;" class="btn btn-primary">< Home</button></a>
+    <form action="{{ route('search') }}" method="GET">
+            <input type="text" class="form-control" placeholder="Type the name" style=" float:left;" name="search">
+            <button class="btn btn-primary" style=" float:left;" type="submit">Search</button>
+    </form>
     <table class="table table-bordered">
         <tr>
             <th width="50px"><input type="checkbox" id="master"></th>
@@ -33,14 +37,14 @@
             <th width="100px">Action</th>
         </tr>
         @if($users->count())
-            @foreach($users as $key => $record)
+            @foreach($users as $record)
                 <tr id="tr_{{$record->id}}">
                 @if($record->usertype=='1')
                     <td><input type="checkbox" disabled></td>
                 @else
                     <td><input type="checkbox" class="sub_chk" data-id="{{$record->id}}"></td>
                 @endif
-                    <td>{{ ++$key }}</td>
+                    <td>{{ $record->id }}</td>
                     <td>{{ $record->name }}</td>
                     <td>{{ $record->email }}</td>
                     <td>{{ $record->official_email_id }}</td>

@@ -37,4 +37,5 @@ Route::get('/download', 'HomeController@export');
 Route::get('/delete', 'HomeController@table');
 Route::delete('delete/{id}', 'HomeController@destroy');
 Route::delete('userDeleteAll', 'HomeController@deleteAll');
+Route::get('/records/srech', 'HomeController@search')->name('search');
 
