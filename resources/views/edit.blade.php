@@ -36,6 +36,24 @@
 				</div>
 
 				<div class="wrap-input100 validate-input">
+					<span class="label-input100">CGPA</span>
+					<input class="input100" type="text" name="cgpa" value="{{(Auth::user()->CGPA)}}" required>
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">12th %</span>
+					<input class="input100" type="text" name="12th" value="{{(Auth::user()->XII)}}" required>
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">10th %</span>
+					<input class="input100" type="text" name="10th" value="{{(Auth::user()->X)}}" required>
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input">
 					<span class="label-input100">Contact No.</span>
 					<input class="input100" type="text" name="phone" value="{{(Auth::user()->phone)}}" required>
 					<span class="focus-input100"></span>

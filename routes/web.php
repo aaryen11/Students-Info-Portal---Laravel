@@ -40,4 +40,10 @@ Route::get('users/{id}', ['uses'=>'HomeController@destroy', 'as'=>'users.user_id
 //Route::get('/records/srech', 'HomeController@search')->name('search');
 
 Route::get('users', ['uses'=>'HomeController@usertable', 'as'=>'users.usertable']);
+Route::get('/email', 'HomeController@email');
+Route::post('/all', 'HomeController@all');
+Route::post('/university', 'HomeController@university');
+Route::post('/group', 'HomeController@group');
+Route::post('/section', 'HomeController@section');
+Route::post('/marks', 'HomeController@marks');
 

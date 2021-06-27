@@ -12,7 +12,7 @@ class UsersExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return User::all();
+        return User::where('usertype','2')->get();
     }
 
     public function headings(): array
@@ -32,6 +32,9 @@ class UsersExport implements FromCollection, WithHeadings
             'User Type',
             'Created at',
             'Updated at',
+            '12th %',
+            '10th %',
+            'CGPA'
         ];
     }
 }

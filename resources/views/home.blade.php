@@ -31,6 +31,21 @@
       </div><br>
       <div class="profile-card-loc">
         <span class="profile-card-loc__txt">
+            CGPA : {{Auth::user()->CGPA}}
+        </span>
+      </div><br>
+      <div class="profile-card-loc">
+        <span class="profile-card-loc__txt">
+            12th % : {{Auth::user()->XII}}
+        </span>
+      </div><br>
+      <div class="profile-card-loc">
+        <span class="profile-card-loc__txt">
+            10th % : {{Auth::user()->X}}
+        </span>
+      </div><br>
+      <div class="profile-card-loc">
+        <span class="profile-card-loc__txt">
             Section : {{Auth::user()->section}}
         </span>
       </div><br>
@@ -61,6 +76,9 @@
         </div>
         <div class="profile-card-inf__item">
         <div class="profile-card-inf__txt"><a href="/download"><button class="btn btn-danger">Download Student Records</button></a></div>
+        </div>
+        <div class="profile-card-inf__item">
+        <div class="profile-card-inf__txt"><a href="/email"><button class="btn btn-danger">Send Email</button></a></div>
         </div>
         <div class="profile-card-inf__item">
         <div class="profile-card-inf__txt"><a href="/users"><button class="btn btn-danger">Delete Records</button></a></div>

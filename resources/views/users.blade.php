@@ -24,6 +24,9 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Official Email</th>
+                <th>CGPA</th>
+                <th>12th %</th>
+                <th>10th %</th>
                 <th>Contact No.</th>
                 <th>Course</th>
                 <th>Branch</th>
@@ -74,6 +77,9 @@ $(document).ready(function(){
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email'},
             {data: 'official_email_id', name: 'official_email_id'},
+            {data: 'CGPA', name: 'CGPA'},
+            {data: 'XII', name: 'XII'},
+            {data: 'X', name: 'X'},
             {data: 'phone', name: 'phone'},
             {data: 'course', name: 'course'},
             {data: 'branch', name: 'branch'},

@@ -154,6 +154,9 @@ class HomeController extends Controller
          'name' => $request->get('name'),
          'email' => $request->get('email'),
          'official_email_id' => $request->get('oemail'),
+         'CGPA' => $request->get('cgpa'),
+         'XII' => $request->get('12th'),
+         'X' => $request->get('10th'),
          'course' => $request->get('course'),
          'branch' => $request->get('branch'),
          'phone' => $request->get('phone'),
@@ -225,7 +228,7 @@ class HomeController extends Controller
         if(Auth::user()->usertype == 1) {
         if($request->ajax())
         {
-            $data = User::latest()->get();
+            $data = User::where('usertype','2')->oldest()->get();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($data){
@@ -241,5 +244,150 @@ class HomeController extends Controller
             return response(abort(403,''));
         }
 
+    }
+
+    public function email()   
+    {  
+        if(Auth::user()->usertype == 1) {
+            $uni = User::distinct()->where('usertype','2')->select('university')->get()->toArray();
+            $group = User::distinct()->where('usertype','2')->select('group')->get()->toArray();
+            $sec = User::distinct()->where('usertype','2')->select('section')->get()->toArray();
+            return view('email')->with('uni',$uni)->with('group',$group)->with('sec',$sec);
+        }
+        else{
+            return response(abort(403,''));
+        }  
+    }
+
+    public function all(Request $request)   
+    {  
+        if(Auth::user()->usertype == 1) {
+            $subject = $request->get('esub');
+            $body = $request->get('ebody');
+             $emails = DB::table('users')->where('usertype','2')->pluck('email')->toArray();
+             $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+             foreach($emails as $email)
+             {
+                 $beautymail->send('email-template',array('msg' => $body), function($message) use ($email,$subject)
+                 {
+                     $message->from('noreply.geu.gehu@gmail.com');
+                     $message->to($email);
+                     $message->subject($subject); 
+                 });
+             }
+ 
+             return redirect()->back()->with("success","Email sent");
+        }
+        else{
+            return response(abort(403,''));
+        }  
+    }
+
+    public function university(Request $request)   
+    {  
+        if(Auth::user()->usertype == 1) {
+            $uni = $request->get('uni');
+            $subject = $request->get('esub');
+            $body = $request->get('ebody');
+             $emails = DB::table('users')->where('usertype','2')->where('university',$uni)->pluck('email')->toArray();
+             $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+             foreach($emails as $email)
+             {
+                 $beautymail->send('email-template',array('msg' => $body), function($message) use ($email,$subject)
+                 {
+                     $message->from('noreply.geu.gehu@gmail.com');
+                     $message->to($email);
+                     $message->subject($subject); 
+                 });
+             }
+ 
+             return redirect()->back()->with("success","Email sent");
+        }
+        else{
+            return response(abort(403,''));
+        }  
+    }
+
+    public function group(Request $request)   
+    {  
+        if(Auth::user()->usertype == 1) {
+            $group = $request->get('grp');
+            $subject = $request->get('esub');
+            $body = $request->get('ebody');
+             $emails = DB::table('users')->where('usertype','2')->where('group',$group)->pluck('email')->toArray();
+             $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+             foreach($emails as $email)
+             {
+                 $beautymail->send('email-template',array('msg' => $body), function($message) use ($email,$subject)
+                 {
+                     $message->from('noreply.geu.gehu@gmail.com');
+                     $message->to($email);
+                     $message->subject($subject); 
+                 });
+             }
+ 
+             return redirect()->back()->with("success","Email sent");
+        }
+        else{
+            return response(abort(403,''));
+        }  
+    }
+
+
+    public function section(Request $request)   
+    {  
+        if(Auth::user()->usertype == 1) {
+            $section = $request->get('sec');
+            $subject = $request->get('esub');
+            $body = $request->get('ebody');
+             $emails = DB::table('users')->where('usertype','2')->where('section',$section)->pluck('email')->toArray();
+             $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+             foreach($emails as $email)
+             {
+                 $beautymail->send('email-template',array('msg' => $body), function($message) use ($email,$subject)
+                 {
+                     $message->from('noreply.geu.gehu@gmail.com');
+                     $message->to($email);
+                     $message->subject($subject); 
+                 });
+             }
+ 
+             return redirect()->back()->with("success","Email sent");
+        }
+        else{
+            return response(abort(403,''));
+        }  
+    }
+
+    public function marks(Request $request)   
+    {  
+        if(Auth::user()->usertype == 1) {
+            $xii = floatval($request->get('12th'));
+            $x = floatval($request->get('10th'));
+            $cgpa = floatval($request->get('cgpa'));
+            $subject = $request->get('esub');
+            $body = $request->get('ebody');
+             $emails = DB::table('users')->where('usertype','2')->where('X','>=',$x)->where('XII','>=',$xii)->where('CGPA','>=',$cgpa)->pluck('email')->toArray();
+             if($emails == null){
+                return redirect()->back()->with("success","No Such Student");
+             }
+             else{
+                $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+                foreach($emails as $email)
+                {
+                    $beautymail->send('email-template',array('msg' => $body), function($message) use ($email,$subject)
+                    {
+                        $message->from('noreply.geu.gehu@gmail.com');
+                        $message->to($email);
+                        $message->subject($subject); 
+                    });
+                }
+    
+                return redirect()->back()->with("success","Email sent");
+            }
+        }
+        else{
+            return response(abort(403,''));
+        }  
     }
 }
