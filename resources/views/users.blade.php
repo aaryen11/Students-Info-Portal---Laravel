@@ -44,6 +44,112 @@
  </body>
 </html>
 
+<div id="formModal" class="modal fade" role="dialog">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Record</h4>
+        </div>
+        <div class="modal-body">
+         <span id="form_result"></span>
+         <form method="post" id="sample_form" class="form-horizontal">
+          @csrf
+          <div class="form-group">
+            <label class="control-label col-md-4" >Name : </label>
+            <div class="col-md-8">
+             <input type="text" name="name" id="name" class="form-control" />
+            </div>
+           </div>
+           <div class="form-group">
+            <label class="control-label col-md-4">Email : </label>
+            <div class="col-md-8">
+             <input type="text" name="email" id="email" class="form-control" />
+            </div>
+            </div>
+            <div class="form-group">
+            <label class="control-label col-md-4">Official Email : </label>
+            <div class="col-md-8">
+             <input type="text" name="oemail" id="oemail" class="form-control" />
+            </div>
+            </div>
+            <div class="form-group">
+            <label class="control-label col-md-4">CGPA : </label>
+            <div class="col-md-8">
+             <input type="text" name="cgpa" id="cgpa" class="form-control" />
+            </div>
+            </div>
+            <div class="form-group">
+            <label class="control-label col-md-4">12th % : </label>
+            <div class="col-md-8">
+             <input type="text" name="12th" id="12th" class="form-control" />
+            </div>
+           </div>
+           <div class="form-group">
+            <label class="control-label col-md-4">10th % : </label>
+            <div class="col-md-8">
+             <input type="text" name="10th" id="10th" class="form-control" />
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label class="control-label col-md-4">Contact No. : </label>
+            <div class="col-md-8">
+             <input type="text" name="phone" id="phone" class="form-control" />
+            </div>
+           </div>
+
+
+           <div class="form-group">
+            <label class="control-label col-md-4">Course : </label>
+            <div class="col-md-8">
+             <input type="text" name="course" id="course" class="form-control" />
+            </div>
+           </div>
+
+
+           <div class="form-group">
+            <label class="control-label col-md-4">Branch : </label>
+            <div class="col-md-8">
+             <input type="text" name="branch" id="branch" class="form-control" />
+            </div>
+           </div>
+
+
+           <div class="form-group">
+            <label class="control-label col-md-4">Section : </label>
+            <div class="col-md-8">
+             <input type="text" name="section" id="section" class="form-control" />
+            </div>
+           </div>
+
+
+           <div class="form-group">
+            <label class="control-label col-md-4">Group : </label>
+            <div class="col-md-8">
+             <input type="text" name="group" id="group" class="form-control" />
+            </div>
+           </div>
+
+
+           <div class="form-group">
+            <label class="control-label col-md-4">University : </label>
+            <div class="col-md-8">
+             <input type="text" name="university" id="university" class="form-control" />
+            </div>
+           </div>
+                <br />
+                <div class="form-group" align="center">
+                 <input type="hidden" name="action" id="action" value="Add" />
+                 <input type="hidden" name="hidden_id" id="hidden_id" />
+                 <input type="submit" name="action_button" id="action_button" class="btn btn-warning" value="Add" />
+                </div>
+         </form>
+        </div>
+     </div>
+    </div>
+</div>
+
 <div id="confirmModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -90,6 +196,70 @@ $(document).ready(function(){
   ]
  });
 
+ $('#sample_form').on('submit', function(event){
+  event.preventDefault();
+  var action_url = "{{ route('user.update') }}";
+
+  $.ajax({
+   url: action_url,
+   method:"POST",
+   data:$(this).serialize(),
+   dataType:"json",
+   success:function(data)
+   {
+    var html = '';
+    if(data.errors)
+    {
+     html = '<div class="alert alert-danger">';
+     for(var count = 0; count < data.errors.length; count++)
+     {
+      html += '<p>' + data.errors[count] + '</p>';
+     }
+     html += '</div>';
+    }
+    if(data.success)
+    {
+     html = '<div class="alert alert-success">' + data.success + '</div>';
+     $('#user_table').DataTable().ajax.reload();
+    }
+    $('#form_result').html(html);
+   }
+  });
+ });
+
+
+
+
+ $(document).on('click', '.edit', function(){
+  var id = $(this).attr('id');
+  $('#form_result').html('');
+  $.ajax({
+   url :"users/edit/"+id,
+   dataType:"json",
+   success:function(data)
+   {
+    $('#name').val(data.result.name);
+    $('#email').val(data.result.email);
+    $('#oemail').val(data.result.official_email_id);
+    $('#cgpa').val(data.result.CGPA);
+    $('#12th').val(data.result.XII);
+    $('#10th').val(data.result.X);
+    $('#phone').val(data.result.phone);
+    $('#course').val(data.result.course);
+    $('#branch').val(data.result.branch);
+    $('#section').val(data.result.section);
+    $('#group').val(data.result.group);
+    $('#university').val(data.result.university);
+    $('#hidden_id').val(id);
+    $('.modal-title').text('Edit Record');
+    $('#action_button').val('Edit');
+    $('#action').val('Edit');
+    $('#formModal').modal('show');
+   }
+  })
+ });
+
+
  var user_id;
 
  $(document).on('click', '.delete', function(){
@@ -103,7 +273,7 @@ $(document).ready(function(){
    beforeSend:function(){
     $('#ok_button').text('Deleting...');
    },
-   success:function(data)
+   success:function()
    {
     setTimeout(function(){
      $('#confirmModal').modal('hide');

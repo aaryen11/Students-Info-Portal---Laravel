@@ -232,7 +232,8 @@ class HomeController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                        $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
+                        $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
                         return $button;
                     })
                     ->rawColumns(['action'])
@@ -389,5 +390,53 @@ class HomeController extends Controller
         else{
             return response(abort(403,''));
         }  
+    }
+
+
+    public function edit($id)
+    {
+        if(request()->ajax())
+        {
+            $data = User::findOrFail($id);
+            return response()->json(['result' => $data]);
+        }
+    }
+
+
+    public function aupdate(Request $request, User $sample_data)
+    {
+        $rules = array(
+            'name'        =>  'required',
+            'email'         =>  'required',
+            'university'         =>  'required'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'name'        =>  $request->name,
+            'email'         =>  $request->email,
+            'official_email_id'         =>  $request->oemail,
+            'CGPA'         =>  $request->cgpa,
+            'XII'         =>  $request->get('12th'),
+            'X'         =>  $request->get('10th'),
+            'phone'         =>  $request->get('phone'),
+            'course'         =>  $request->get('course'),
+            'branch'         =>  $request->branch,
+            'section'         =>  $request->section,
+            'group'         =>  $request->group,
+            'university'         =>  $request->university,
+            'updated_at' => date('Y-m-d H:i:s')
+        );
+
+        User::whereId($request->hidden_id)->update($form_data);
+
+        return response()->json(['success' => 'Data is successfully updated']);
+
     }
 }
