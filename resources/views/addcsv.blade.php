@@ -48,6 +48,6 @@
     </div>
     @section('footer')
 
-@stop
+    @stop
 </div>
 @endsection

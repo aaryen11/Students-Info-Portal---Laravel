@@ -91,5 +91,8 @@
             @yield('content')
         </main>
     </div>
+    @section('footer')
+    <?php echo View::make('footer') ?>
+    @show
 </body>
 </html>

@@ -102,7 +102,6 @@
 
   </div>
 </div>
-<div class="padding-top:12%; margin-bottom:-12%"><span style="color:white; float:right;">Coded with &hearts; by <b>Kunal Aaryen Sinha</b></span></div>
 @endsection
 
 
