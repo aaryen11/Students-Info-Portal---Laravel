@@ -12,30 +12,38 @@ class UsersExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return User::where('usertype','2')->get();
+        return User::where('usertype','2')->select(
+        'name', 
+        'university_roll_no',
+        'email',
+        'official_email_id',
+        'XII',
+        'X',
+        'CGPA',
+        'phone',
+        'course',
+        'branch',
+        'section',
+        'group',
+        'university')->get();
     }
 
     public function headings(): array
     {
         return [
-            'S.No',
             'Name',
+            'University Roll No',
             'Email',
-            'Email_Verified_At',
             'Official Mail',
+            '12th %',
+            '10th %',
+            'CGPA',
             'Phone',
             'Course',
             'Branch',
             'Section',
             'Group',
             'University',
-            'User Type',
-            'Created at',
-            'Updated at',
-            '12th %',
-            '10th %',
-            'CGPA',
-            'University Roll No'
         ];
     }
 }
