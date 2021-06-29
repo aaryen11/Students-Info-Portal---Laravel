@@ -24,6 +24,12 @@
 				</div>
 
 				<div class="wrap-input100 validate-input">
+					<span class="label-input100">University Roll No</span>
+					<input class="input100" type="text" name="university_roll_no" value="{{(Auth::user()->university_roll_no)}}" required>
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input">
 					<span class="label-input100">Email</span>
 					<input class="input100" type="text" name="email" value="{{(Auth::user()->email)}}" required>
 					<span class="focus-input100"></span>

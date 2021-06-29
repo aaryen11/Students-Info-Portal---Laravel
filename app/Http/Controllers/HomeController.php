@@ -121,8 +121,10 @@ class HomeController extends Controller
                $university = $data['university'];
                $section = $data['section'];
                $group = $data['group'];
+               $university_roll_no = $data['uroll'];
                     $studentdata= User::firstOrNew(['email'=>$email]);
                     $studentdata->name=$name;
+                    $studentdata->university_roll_no=$university_roll_no;
                     $studentdata->email=$email;
                     $studentdata->university=$university;
                     $studentdata->section=$section;
@@ -152,6 +154,7 @@ class HomeController extends Controller
         $id = Auth::user()->email;
         $data = [
          'name' => $request->get('name'),
+         'university_roll_no' => $request->get('university_roll_no'),
          'email' => $request->get('email'),
          'official_email_id' => $request->get('oemail'),
          'CGPA' => $request->get('cgpa'),
@@ -420,6 +423,7 @@ class HomeController extends Controller
 
         $form_data = array(
             'name'        =>  $request->name,
+            'university_roll_no'         =>  $request->university_roll_no,
             'email'         =>  $request->email,
             'official_email_id'         =>  $request->oemail,
             'CGPA'         =>  $request->cgpa,

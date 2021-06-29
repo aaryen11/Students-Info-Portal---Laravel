@@ -21,6 +21,11 @@
       </div><br>
       <div class="profile-card-loc">
         <span class="profile-card-loc__txt">
+            University Roll No : {{Auth::user()->university_roll_no}}
+        </span>
+      </div><br>
+      <div class="profile-card-loc">
+        <span class="profile-card-loc__txt">
             Email : {{Auth::user()->email}}
         </span>
       </div><br>

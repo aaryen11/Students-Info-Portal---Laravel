@@ -23,6 +23,7 @@
       <tr>
                 <th>No</th>
                 <th>Name</th>
+                <th>University Roll No</th>
                 <th>Email</th>
                 <th>Official Email</th>
                 <th>CGPA</th>
@@ -60,6 +61,12 @@
             <label class="control-label col-md-4" >Name : </label>
             <div class="col-md-8">
              <input type="text" name="name" id="name" class="form-control" />
+            </div>
+           </div>
+           <div class="form-group">
+            <label class="control-label col-md-4" >University Roll No : </label>
+            <div class="col-md-8">
+             <input type="text" name="university_roll_no" id="university_roll_no" class="form-control" />
             </div>
            </div>
            <div class="form-group">
@@ -182,6 +189,7 @@ $(document).ready(function(){
   columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'name', name: 'name'},
+            {data: 'university_roll_no', name: 'university_roll_no'},
             {data: 'email', name: 'email'},
             {data: 'official_email_id', name: 'official_email_id'},
             {data: 'CGPA', name: 'CGPA'},
@@ -240,6 +248,7 @@ $(document).ready(function(){
    success:function(data)
    {
     $('#name').val(data.result.name);
+    $('#university_roll_no').val(data.result.university_roll_no);
     $('#email').val(data.result.email);
     $('#oemail').val(data.result.official_email_id);
     $('#cgpa').val(data.result.CGPA);

@@ -34,7 +34,8 @@ class UsersExport implements FromCollection, WithHeadings
             'Updated at',
             '12th %',
             '10th %',
-            'CGPA'
+            'CGPA',
+            'University Roll No'
         ];
     }
 }
