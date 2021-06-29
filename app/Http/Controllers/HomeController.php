@@ -121,7 +121,7 @@ class HomeController extends Controller
                $university = $data['university'];
                $section = $data['section'];
                $group = $data['group'];
-               $university_roll_no = $data['uroll'];
+               $university_roll_no = $data['universityrollno'];
                     $studentdata= User::firstOrNew(['email'=>$email]);
                     $studentdata->name=$name;
                     $studentdata->university_roll_no=$university_roll_no;
