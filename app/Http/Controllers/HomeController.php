@@ -287,7 +287,7 @@ class HomeController extends Controller
              {
                  $beautymail->send('email-template',array('msg' => $body), function($message) use ($email,$subject)
                  {
-                     $message->from('noreply.geu.gehu@gmail.com');
+                     $message->from('noreply.geu.gehu@gmail.com','Admin');
                      $message->to($email);
                      $message->subject($subject); 
                  });
@@ -312,7 +312,7 @@ class HomeController extends Controller
              {
                  $beautymail->send('email-template',array('msg' => $body), function($message) use ($email,$subject)
                  {
-                     $message->from('noreply.geu.gehu@gmail.com');
+                     $message->from('noreply.geu.gehu@gmail.com','Admin');
                      $message->to($email);
                      $message->subject($subject); 
                  });
@@ -337,7 +337,7 @@ class HomeController extends Controller
              {
                  $beautymail->send('email-template',array('msg' => $body), function($message) use ($email,$subject)
                  {
-                     $message->from('noreply.geu.gehu@gmail.com');
+                     $message->from('noreply.geu.gehu@gmail.com','Admin');
                      $message->to($email);
                      $message->subject($subject); 
                  });
@@ -363,7 +363,7 @@ class HomeController extends Controller
              {
                  $beautymail->send('email-template',array('msg' => $body), function($message) use ($email,$subject)
                  {
-                     $message->from('noreply.geu.gehu@gmail.com');
+                     $message->from('noreply.geu.gehu@gmail.com','Admin');
                      $message->to($email);
                      $message->subject($subject); 
                  });
@@ -394,7 +394,7 @@ class HomeController extends Controller
                 {
                     $beautymail->send('email-template',array('msg' => $body), function($message) use ($email,$subject)
                     {
-                        $message->from('noreply.geu.gehu@gmail.com');
+                        $message->from('noreply.geu.gehu@gmail.com','Admin');
                         $message->to($email);
                         $message->subject($subject); 
                     });
@@ -411,16 +411,22 @@ class HomeController extends Controller
 
     public function edit($id)
     {
+        if(Auth::user()->usertype == 1) {
         if(request()->ajax())
         {
             $data = User::findOrFail($id);
             return response()->json(['result' => $data]);
         }
+        }
+        else{
+            return response(abort(403,''));
+        }  
     }
 
 
     public function aupdate(Request $request, User $sample_data)
     {
+        if(Auth::user()->usertype == 1) {
         $rules = array(
             'name'        =>  'required',
             'email'         =>  'required',
@@ -455,6 +461,10 @@ class HomeController extends Controller
         User::whereId($request->hidden_id)->update($form_data);
 
         return response()->json(['success' => 'Data is successfully updated']);
+        }
+        else{
+            return response(abort(403,''));
+        }  
 
     }
 }

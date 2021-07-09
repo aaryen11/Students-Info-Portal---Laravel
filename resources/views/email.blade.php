@@ -60,6 +60,13 @@
             </div>
 			<div class="col-lg-8">
 				<div class="card">
+        <form method="POST" onsubmit="bodycopy()">
+      			@csrf
+            <script>
+              function bodycopy(){
+                document.getElementById('ebody').value = document.getElementById('htmlsource').innerHTML
+              }
+	          </script>
 					<div class="card-body p-4">
 						<div class="row mb-3">
 							<div class="col-sm-3">
@@ -82,7 +89,7 @@
 						<div class="row">
 							<div class="col-sm-3"></div>
 							<div class="col-sm-9 text-secondary text-center">
-								<input type="button" class="btn btn-danger px-4" value="Send Mail to All">
+              <button  formaction="/all" class="btn btn-danger">Send Mail to All</button>
 							</div>
 						</div>
 
@@ -151,22 +158,13 @@
                 <br><i style="color:red;">*Enter 0 in case all are eligible</i>
 							</div>
 						</div>
-
-
 					</div>
+          </form>
 				</div>
 			</div>
           </div>
-
         </div>
     </div>
-	<script>
-		jQuery(function(){
-    jQuery('form').submit( function(e) {
-        jQuery('textarea').val( jQuery('#htmlsource').html() );
-      });
-	});
-	</script>
     @section('footer')
 
 	@stop

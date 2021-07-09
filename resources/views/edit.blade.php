@@ -140,7 +140,7 @@
 								<h6 class="mb-0">CGPA (Aggregate)</h6>
 							</div>
 							<div class="col-sm-9 text-secondary">
-								<input type="text" class="form-control" name="cgpa" value="{{(Auth::user()->CGPA)}}" required>
+								<input type="number" class="form-control" step="any" name="cgpa" value="{{(Auth::user()->CGPA)}}" required>
 							</div>
 						</div>
 						<div class="row mb-3">
@@ -148,7 +148,7 @@
 								<h6 class="mb-0">12<sup>th</sup> Percentage</h6>
 							</div>
 							<div class="col-sm-9 text-secondary">
-								<input type="text" class="form-control" name="12th" value="{{(Auth::user()->XII)}}" required>
+								<input type="number" class="form-control" step="any" name="12th" value="{{(Auth::user()->XII)}}" required>
 							</div>
 						</div>
 						<div class="row mb-3">
@@ -156,7 +156,7 @@
 								<h6 class="mb-0">10<sup>th</sup> Percentage</h6>
 							</div>
 							<div class="col-sm-9 text-secondary">
-								<input type="text" class="form-control" name="10th" value="{{(Auth::user()->X)}}" required>
+								<input type="number" class="form-control" step="any" name="10th" value="{{(Auth::user()->X)}}" required>
 							</div>
 						</div>
 						<div class="row">
@@ -166,7 +166,9 @@
 							</div>
 						</div>
 					</div>
+					</form>
 				</div>
+
 			</div>
           </div>
 
