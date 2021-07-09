@@ -1,114 +1,152 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" type="text/css" href="{{ asset('css/master.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
 @section('content')
-<link href="{{ asset('css/home.css') }}" rel="stylesheet">
+  <div class="container">
+    <div class="main-body">
+    
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card pt-3 pb-2">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                      <img src="{{ asset('profile.png') }}" alt="Admin" class="rounded-circle" width="150">
+                    <div class="mt-3">
+                      <h4>{{(Auth::user()->name)}}</h4>
+                      <p class="text-secondary mb-1">
+                      @if((Auth::user()->usertype) == '1')
+                          Admin
+                      @elseif((Auth::user()->usertype) == '2')
+                          Student
+                      @endif
+                      </p>
+                      <p class="text-secondary mb-1">{{Auth::user()->university_roll_no}}</p>
+                      <p class="text-secondary mb-1">{{(Auth::user()->email)}}</p>
+                      <p class="text-muted font-size-sm">
+                      @if((Auth::user()->university) == 'GEU')
+                          Graphic Era Deemed to be University
+                      @elseif((Auth::user()->university) == 'GEHU')
+                          Graphic Era Hill University
+                      @elseif((Auth::user()->university) == 'GEHUB')
+                          Graphic Era Hill University, Bhimtal
+                      @endif
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mt-3">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><i class="fa fa-envelope-o pr-2" style="font-size: 20px;" aria-hidden="true"></i>Email</h6>
+                    <span class="text-secondary">{{Auth::user()->email}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><i class="fa fa-github pr-2" style="font-size: 20px;" aria-hidden="true"></i>Github</h6>
+                    <span class="text-secondary">{{Auth::user()->github_profile}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><i class="fa fa-phone pr-2" style="font-size: 20px;" aria-hidden="true"></i>Contact</h6>
+                    <span class="text-secondary">{{Auth::user()->phone}}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body p-4">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Official Email ID</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{Auth::user()->official_email_id}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">University Roll No.</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{Auth::user()->university_roll_no}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Course</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{Auth::user()->course}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Branch</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{Auth::user()->branch}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Section</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{Auth::user()->section}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">CGPA (Aggregate)</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{Auth::user()->CGPA}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">12<sup>th</sup> Percentage</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{Auth::user()->XII}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">10<sup>th</sup> Percentage</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{Auth::user()->X}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <a class="btn btn-danger" href="/edit">Edit</a>
+                    </div>
+                  </div>
+                  <br>
+                  <a href="/changePassword" style="font-size: 14px;font-style: italic; text-align: center;">
+                    * If it's your first login, Kindly change your password by navigating to change password section.
+                  </a>
+                </div>
+              </div>
 
-<div class="wrapper" style="padding-top:3%">
-<div class="profile-card js-profile-card ">
-    <div class="profile-card__cnt js-profile-cnt">
-      <div class="profile-card__name">{{(Auth::user()->name)}}</div><br>
-      <div class="profile-card__txt">{{(Auth::user()->department)}}</strong></div><br>
-      <div class="profile-card-loc">
-        <span class="profile-card-loc__txt">
-            @if((Auth::user()->university) == 'GEU')
-                Graphic Era Deemed to be University
-            @elseif((Auth::user()->university) == 'GEHU')
-                Graphic Era Hill University
-            @elseif((Auth::user()->university) == 'GEHUB')
-                Graphic Era Hill University, Bhimtal
-            @endif
-        </span>
-      </div><br>
-      <div class="profile-card-loc">
-        <span class="profile-card-loc__txt">
-            University Roll No : {{Auth::user()->university_roll_no}}
-        </span>
-      </div><br>
-      <div class="profile-card-loc">
-        <span class="profile-card-loc__txt">
-            Email : {{Auth::user()->email}}
-        </span>
-      </div><br>
-      <div class="profile-card-loc">
-        <span class="profile-card-loc__txt">
-            Official Email : {{Auth::user()->official_email_id}}
-        </span>
-      </div><br>
-      <div class="profile-card-loc">
-        <span class="profile-card-loc__txt">
-            CGPA : {{Auth::user()->CGPA}}
-        </span>
-      </div><br>
-      <div class="profile-card-loc">
-        <span class="profile-card-loc__txt">
-            12th % : {{Auth::user()->XII}}
-        </span>
-      </div><br>
-      <div class="profile-card-loc">
-        <span class="profile-card-loc__txt">
-            10th % : {{Auth::user()->X}}
-        </span>
-      </div><br>
-      <div class="profile-card-loc">
-        <span class="profile-card-loc__txt">
-            Section : {{Auth::user()->section}}
-        </span>
-      </div><br>
-      <div class="profile-card-loc">
-        <span class="profile-card-loc__txt">
-            Group : {{Auth::user()->group}}
-        </span>
-      </div><br>
-      <div class="profile-card-loc">
-        <span class="profile-card-loc__txt">
-            Contact No. : {{Auth::user()->phone}}
-        </span>
-      </div><br>
-      <div class="profile-card-loc">
-        <span class="profile-card-loc__txt">
-            Course : {{Auth::user()->course}}
-        </span>
-      </div><br>
-      <div class="profile-card-loc">
-        <span class="profile-card-loc__txt">
-            Branch : {{Auth::user()->branch}}
-        </span>
-      </div><br>
-      <div class="profile-card-inf">
-      @if((Auth::user()->usertype) == '1')
-        <div class="profile-card-inf__item">
-        <div class="profile-card-inf__txt"><a href="/upload"><button class="btn btn-danger">Upload Student Records</button></a></div>
-        </div>
-        <div class="profile-card-inf__item">
-        <div class="profile-card-inf__txt"><a href="/download"><button class="btn btn-danger">Download Student Records</button></a></div>
-        </div>
-        <div class="profile-card-inf__item">
-        <div class="profile-card-inf__txt"><a href="/email"><button class="btn btn-danger">Send Email</button></a></div>
-        </div>
-        <div class="profile-card-inf__item">
-        <div class="profile-card-inf__txt"><a href="/users"><button class="btn btn-danger">View Records</button></a></div>
-        </div>
-        @endif
+            </div>
+          </div>
 
-        @if((Auth::user()->usertype) == '1'||(Auth::user()->usertype) == '2')
-        <div class="profile-card-inf__item">
-          <div class="profile-card-inf__txt"><a href="/edit"><button class="btn btn-danger">Update Details</button></a></div>
         </div>
-        @endif
-        <a href="/changePassword" class="pt-4">
-        * If it's your first login, Kindly change your password by navigating to change password section.
-        </a>
-        @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-        @endif
     </div>
+    @section('footer')
 
-  </div>
-</div>
+@stop
+
 @endsection
-
-
-        
-                     

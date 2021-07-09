@@ -60,6 +60,30 @@
                                     <a class="nav-link" href="/home">{{ __('Home') }}</a>
                             </li>
 
+                            @if((Auth::user()->usertype) == '1')
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Actions
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/users">
+                                        View Records
+                                </a>
+                                <a class="dropdown-item" href="/upload">
+                                        Upload Student Records
+                                </a>
+                                <a class="dropdown-item" href="/download">
+                                        Download Student Records
+                                </a>
+                                <a class="dropdown-item" href="/email">
+                                        Send Mail
+                                </a>
+
+                                </div>
+                            </li>
+                            @endif
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

@@ -26,6 +26,7 @@
                 <th>University Roll No</th>
                 <th>Email</th>
                 <th>Official Email</th>
+                <th>Github Profile</th>
                 <th>CGPA</th>
                 <th>12th %</th>
                 <th>10th %</th>
@@ -81,6 +82,14 @@
              <input type="text" name="oemail" id="oemail" class="form-control" />
             </div>
             </div>
+
+            <div class="form-group">
+            <label class="control-label col-md-4">Github Profile : </label>
+            <div class="col-md-8">
+             <input type="text" name="github" id="github" class="form-control" />
+            </div>
+            </div>
+
             <div class="form-group">
             <label class="control-label col-md-4">CGPA : </label>
             <div class="col-md-8">
@@ -192,6 +201,7 @@ $(document).ready(function(){
             {data: 'university_roll_no', name: 'university_roll_no'},
             {data: 'email', name: 'email'},
             {data: 'official_email_id', name: 'official_email_id'},
+            {data: 'github_profile', name: 'github_profile'},
             {data: 'CGPA', name: 'CGPA'},
             {data: 'XII', name: 'XII'},
             {data: 'X', name: 'X'},
@@ -251,6 +261,7 @@ $(document).ready(function(){
     $('#university_roll_no').val(data.result.university_roll_no);
     $('#email').val(data.result.email);
     $('#oemail').val(data.result.official_email_id);
+    $('#github').val(data.result.github_profile);
     $('#cgpa').val(data.result.CGPA);
     $('#12th').val(data.result.XII);
     $('#10th').val(data.result.X);

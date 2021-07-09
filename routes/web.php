@@ -18,13 +18,13 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-//Auth::routes();
-
+Auth::routes();
+/*
 Auth::routes([
     'register' => false,
     'verify' => true,
     'reset' => true
-  ]);
+  ]);*/
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/changePassword','HomeController@ChangePasswordview');
@@ -34,6 +34,7 @@ Route::post('/upload', 'HomeController@upload');
 Route::get('/edit', 'HomeController@editprofile');
 Route::post('/save', 'HomeController@update');
 Route::get('/download', 'HomeController@export');
+Route::get('/template', 'HomeController@template');
 //Route::get('/delete', 'HomeController@table');
 Route::get('users/{id}', 'HomeController@destroy');
 //Route::delete('userDeleteAll', 'HomeController@deleteAll');

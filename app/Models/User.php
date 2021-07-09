@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'official_email_id',
+        'github_profile',
         'XII',
         'X',
         'CGPA',

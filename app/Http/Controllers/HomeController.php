@@ -9,6 +9,7 @@ use Hash;
 use Validator;
 use App\Models\User;
 use App\Exports\UsersExport;  
+use App\Exports\Template;  
 use Maatwebsite\Excel\Facades\Excel; 
 use DataTables;
 
@@ -157,7 +158,9 @@ class HomeController extends Controller
          'university_roll_no' => $request->get('university_roll_no'),
          'email' => $request->get('email'),
          'official_email_id' => $request->get('oemail'),
-         'CGPA' => $request->get('cgpa'),
+         'phone' => $request->get('phone'),
+         'github_profile' => $request->get('github'),
+         'cgpa' => $request->get('cgpa'),
          'XII' => $request->get('12th'),
          'X' => $request->get('10th'),
          'course' => $request->get('course'),
@@ -174,6 +177,16 @@ class HomeController extends Controller
     {  
         if(Auth::user()->usertype == 1) {
             return Excel::download(new UsersExport, 'students.xlsx');
+        }
+        else{
+            return response(abort(403,''));
+        }  
+    }
+
+    public function template()   
+    {  
+        if(Auth::user()->usertype == 1) {
+            return Excel::download(new Template, 'template.csv');
         }
         else{
             return response(abort(403,''));
@@ -426,6 +439,7 @@ class HomeController extends Controller
             'university_roll_no'         =>  $request->university_roll_no,
             'email'         =>  $request->email,
             'official_email_id'         =>  $request->oemail,
+            'github_profile' => $request->github,
             'CGPA'         =>  $request->cgpa,
             'XII'         =>  $request->get('12th'),
             'X'         =>  $request->get('10th'),

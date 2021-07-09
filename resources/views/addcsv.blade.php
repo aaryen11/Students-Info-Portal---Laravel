@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
+
 @section('content')
-<link href="{{ asset('css/login.css') }}" rel="stylesheet">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card pt-3"  style="border-radius:10px 10px 10px 10px; opacity:0.85; display:inline-block; margin-top:11%;">
+            <div class="card pt-3"  style="border-radius:10px 10px 10px 10px; opacity:0.85; display:inline-block; box-shadow: 0 2px 6px 0 rgb(218 218 253 / 75%), 0 2px 6px 0 rgb(206 206 238 / 84%); margin-top:11%;">
             <div class="card-body">
-                <img src="http://btechgeu.in/images/logo_graphic_era.gif" style='width:100%;height:20%'>
+                <img src="{{ asset('logo.gif') }}" style='width:100%;height:20%'>
                 </div>
 
                 <div class="card-body">
@@ -40,7 +40,8 @@
                                 </button>
                             </div>
                         </div>
-                        * File Required in CSV Format - <a href="https://convertio.co/" target="_blank">Convert Here</a>
+                        <a href="/template" > Download Template File</a><br>
+                        *The file to be uploaded is required in CSV Format, if u have a file in any other - <a href="https://convertio.co/" target="_blank">Convert Here</a>
                     </form>
                 </div>
             </div>
