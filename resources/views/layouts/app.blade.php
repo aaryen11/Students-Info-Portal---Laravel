@@ -27,7 +27,7 @@
         <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color:maroon">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}" style="font-weight:bold;">
-                    {{ config('app.name', 'Demand Register') }}
+                <img src="{{ asset('profile.png') }}" alt="Logo" class="rounded-circle" width="35">&nbsp; {{ config('app.name', 'Student Details') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
