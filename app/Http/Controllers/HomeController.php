@@ -528,7 +528,7 @@ class HomeController extends Controller
         if(Auth::user()->usertype == 2) {
             $email = Auth::user()->email;
             $data = User::where('usertype','2')->where('email',$email)->select('remarks','tests_attempted','total_marks','tmarks')->get()->toArray();
-            $rank = User::query()->where('usertype','2')->selectRaw('email,RANK() OVER (ORDER BY total_marks DESC) AS rank')->groupBy('email')->get()->where('email',$email)->pluck('rank')->toArray();
+            $rank = User::query()->selectRaw('email,RANK() OVER (ORDER BY total_marks DESC) AS rank')->groupBy('email')->get()->where('email',$email)->pluck('rank')->toArray();
             return view('performance')->with('data',$data[0])->with('rank',$rank[0]);
         }
         else{
