@@ -14,9 +14,9 @@ class AddTestsColumn extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('tests_attempted')->deafult(0);
-            $table->longtext('tmarks')->default('0');
-            $table->decimal('total_marks')->deafult(0);
+            $table->integer('tests_attempted')->deafult(0)->nullable();
+            $table->longtext('tmarks')->default('0')->nullable();
+            $table->decimal('total_marks')->deafult(0)->nullable();
             $table->string('remarks')->nullable();
         });
     }
