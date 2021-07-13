@@ -10,7 +10,9 @@ use Validator;
 use App\Models\User;
 use App\Exports\UsersExport;  
 use App\Exports\Template;  
-use Maatwebsite\Excel\Facades\Excel; 
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint; 
 use DataTables;
 
 class HomeController extends Controller
@@ -280,7 +282,7 @@ class HomeController extends Controller
     {  
         if(Auth::user()->usertype == 1) {
             $subject = $request->get('esub');
-            $body = $request->get('ebody');
+            $body = "<pre>" . $request->get('ebody') . "</pre>";
              $emails = DB::table('users')->where('usertype','2')->pluck('email')->toArray();
              $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
              foreach($emails as $email)
@@ -305,7 +307,7 @@ class HomeController extends Controller
         if(Auth::user()->usertype == 1) {
             $uni = $request->get('uni');
             $subject = $request->get('esub');
-            $body = $request->get('ebody');
+            $body = "<pre>" . $request->get('ebody') . "</pre>";
              $emails = DB::table('users')->where('usertype','2')->where('university',$uni)->pluck('email')->toArray();
              $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
              foreach($emails as $email)
@@ -330,7 +332,7 @@ class HomeController extends Controller
         if(Auth::user()->usertype == 1) {
             $group = $request->get('grp');
             $subject = $request->get('esub');
-            $body = $request->get('ebody');
+            $body = "<pre>" . $request->get('ebody') . "</pre>";
              $emails = DB::table('users')->where('usertype','2')->where('group',$group)->pluck('email')->toArray();
              $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
              foreach($emails as $email)
@@ -356,7 +358,7 @@ class HomeController extends Controller
         if(Auth::user()->usertype == 1) {
             $section = $request->get('sec');
             $subject = $request->get('esub');
-            $body = $request->get('ebody');
+            $body = "<pre>" . $request->get('ebody') . "</pre>";
              $emails = DB::table('users')->where('usertype','2')->where('section',$section)->pluck('email')->toArray();
              $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
              foreach($emails as $email)
@@ -383,7 +385,7 @@ class HomeController extends Controller
             $x = floatval($request->get('10th'));
             $cgpa = floatval($request->get('cgpa'));
             $subject = $request->get('esub');
-            $body = $request->get('ebody');
+            $body = "<pre>" . "<pre>" . $request->get('ebody') . "</pre>". "</pre>";
              $emails = DB::table('users')->where('usertype','2')->where('X','>=',$x)->where('XII','>=',$xii)->where('CGPA','>=',$cgpa)->pluck('email')->toArray();
              if($emails == null){
                 return redirect()->back()->with("success","No Such Student");
@@ -465,6 +467,73 @@ class HomeController extends Controller
         else{
             return response(abort(403,''));
         }  
+
+    }
+
+
+    public function addmarks()
+    {
+        if(Auth::user()->usertype == 1) {
+            return view('addmarks');
+        }
+        else{
+            return response(abort(403,''));
+        }
+
+    }
+
+
+
+    public function tmarks(Request $request){
+        if(Auth::user()->usertype == 1) {
+            $email = $request->get('email');
+            $e = DB::table('users')->where('usertype','2')->where('email','=',$email)->pluck('email')->toArray();
+            if($e){
+                $marks = $request->get('marks');
+                $fmarks = $request->get('tmarks');
+                $per = ($marks/$fmarks)*100;
+                $remarks = $request->get('remarks');
+                $test = DB::table('users')->where('usertype','2')->where('email','=',$email)->pluck('tests_attempted')->toArray();
+                $marksarr = DB::table('users')->where('usertype','2')->where('email','=',$email)->pluck('tmarks')->toArray();
+                $marksarr = $marksarr[0] . "," .$per;
+                $tmarks = DB::table('users')->where('usertype','2')->where('email','=',$email)->pluck('total_marks')->toArray();
+                $tmarks = array_sum(explode(",",$marksarr))/($test[0]+1);
+                $fieldName = "test_".($test[0]+1);
+                if (!Schema::hasColumn('users', $fieldName)){
+                    Schema::table('users', function (Blueprint $table) use ($fieldName) {
+                    $table->decimal($fieldName)->nullable();
+                });
+                }
+                $data = [
+                    'tests_attempted' => $test[0]+1,
+                    'total_marks' => $tmarks,
+                    'remarks' => $remarks,
+                    'tmarks' => $marksarr,
+                    $fieldName => $per,
+                   ];
+                DB::table('users')->where("email",$email)->update($data);
+                return redirect()->back()->with("success","Posted Marks");
+            }
+            else{
+                return redirect()->back()->with("error","No student found with that email address!");
+            }
+        }
+        else{
+            return response(abort(403,''));
+        }
+    }
+
+    public function performance()
+    {
+        if(Auth::user()->usertype == 2) {
+            $email = Auth::user()->email;
+            $data = User::where('usertype','2')->where('email',$email)->select('remarks','tests_attempted','total_marks','tmarks')->get()->toArray();
+            $rank = User::query()->where('usertype','2')->selectRaw('email,RANK() OVER (ORDER BY total_marks DESC) AS rank')->groupBy('email')->get()->where('email',$email)->pluck('rank')->toArray();
+            return view('performance')->with('data',$data[0])->with('rank',$rank[0]);
+        }
+        else{
+            return response(abort(403,''));
+        }
 
     }
 }

@@ -50,3 +50,6 @@ Route::post('/marks', 'HomeController@marks');
 
 Route::post('user/update', 'HomeController@aupdate')->name('user.update');
 Route::get('users/edit/{id}', 'HomeController@edit');
+Route::get('/addmarks', 'HomeController@addmarks');
+Route::post('/postmarks', 'HomeController@tmarks');
+Route::get('/performance', 'HomeController@performance');

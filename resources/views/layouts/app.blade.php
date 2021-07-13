@@ -60,6 +60,12 @@
                                     <a class="nav-link" href="/home">{{ __('Home') }}</a>
                             </li>
 
+                            @if((Auth::user()->usertype) == '2')
+                            <li class="nav-item">
+                                    <a class="nav-link" href="/performance">{{ __('Performance') }}</a>
+                            </li>
+                            @endif
+
                             @if((Auth::user()->usertype) == '1')
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -67,6 +73,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/addmarks">
+                                        Add Marks
+                                </a>
                                 <a class="dropdown-item" href="/users">
                                         View Records
                                 </a>

@@ -11,6 +11,11 @@
                         </div>
         @endif
     
+        @if (session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                        </div>
+        @endif
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
               <div class="card pt-3 pb-2">
@@ -62,94 +67,44 @@
 				<div class="card">
         <form method="POST">
       			@csrf
+            <script>
+              function bodycopy(){
+                //document.getElementById('remarks').value = document.getElementById('htmlsource').innerHTML
+              }
+	          </script>
 					<div class="card-body p-4">
 						<div class="row mb-3">
 							<div class="col-sm-3">
-								<h6 class="mb-0">Email Subject</h6>
+								<h6 class="mb-0">Enter Email Address</h6>
 							</div>
 							<div class="col-sm-9 text-secondary">
-                <input class="form-control" type="text" name="esub" placeholder="Enter Mail Subject" required>
+                <input class="form-control" type="text" name="email" placeholder="Enter Email Address" required>
+							</div>
+						</div>
+            <div class="row mb-3">
+							<div class="col-sm-3">
+								<h6 class="mb-0">Enter Marks</h6>
+							</div>
+							<div class="col-sm-5 text-secondary">
+                <input class="form-control" type="number" step="any" name="marks" placeholder="Enter Marks Scored" required>
+							</div>
+              <div class="col-sm-4 text-secondary">
+                <input class="form-control" type="number" step="any" name="tmarks" placeholder="Enter Total Marks" required>
 							</div>
 						</div>
 						<div class="row mb-3">
 							<div class="col-sm-3">
-								<h6 class="mb-0">Email Body</h6>
+								<h6 class="mb-0">Remarks</h6>
 							</div>
 							<div class="col-sm-9 text-secondary">
-                <textarea class="form-control" name="ebody" id="ebody" cols="30" rows="15"></textarea>
+                <textarea class="form-control" name="remarks" id="remarks" cols="30" rows="15" style=''></textarea>
 							</div>
 						</div>
 						
 						<div class="row">
 							<div class="col-sm-3"></div>
 							<div class="col-sm-9 text-secondary text-center">
-              <button  formaction="/all" class="btn btn-danger">Send Mail to All</button>
-							</div>
-						</div>
-
-            <div class="row mb-3 pt-2">
-							<div class="col-sm-3">
-								<h6 class="mb-0">Send By College</h6>
-							</div>
-							<div class="col-sm-9 text-secondary">
-                Send Mail to       <select style="width:30%;" name="uni" >
-                                      <option hidden disabled selected value>Select University</option>
-                                        @foreach($uni as $u)
-                                            <option value="{{$u['university']}}">{{$u['university']}}</option>
-                                        @endforeach
-                                    </select>
-                Students &nbsp; &nbsp;
-                <button  formaction="/university" class="btn btn-danger">Send Mail</button>
-							</div>
-						</div>
-
-
-            <div class="row mb-3 pt-2">
-							<div class="col-sm-3">
-								<h6 class="mb-0">Send By Group</h6>
-							</div>
-							<div class="col-sm-9 text-secondary">
-                Send Mail to <select style="width:30%;" name="grp" >
-                                  <option hidden disabled selected value>Select Group</option>
-                                  @foreach($group as $g)
-                                      <option value="{{$g['group']}}">{{$g['group']}}</option>
-                                  @endforeach
-                              </select>
-                Students &nbsp; &nbsp;
-                <button  formaction="/group" class="btn btn-danger">Send Mail</button>
-							</div>
-						</div>
-
-
-            
-            <div class="row mb-3 pt-2">
-							<div class="col-sm-3">
-								<h6 class="mb-0">Send By Section</h6>
-							</div>
-							<div class="col-sm-9 text-secondary">
-                Send Mail to <select style="width:30%;" name="sec" >
-                                  <option hidden disabled selected value>Select Section</option>
-                                  @foreach($sec as $s)
-                                      <option value="{{$s['section']}}">{{$s['section']}}</option>
-                                  @endforeach
-                              </select>
-                Students &nbsp; &nbsp;
-                <button  formaction="/section" class="btn btn-danger">Send Mail</button>
-							</div>
-						</div>
-
-
-            <div class="row mb-3 pt-2">
-							<div class="col-sm-3">
-								<h6 class="mb-0">Send By Marks</h6>
-							</div>
-							<div class="col-sm-9 text-secondary">
-                Send Mail to Students having 10th Marks >=
-                <input type="text" name="10th" id="" style="width:15%" >
-                , 12th Marks >= <input type="text" name="12th" id="" style="width:15%" > 
-                , CGPA >= <input type="text" name="cgpa" id="" style="width:15%" >
-                <div class="pt-2"><button  formaction="/marks" class="btn btn-danger">Send Mail</button></div>
-                <br><i style="color:red;">*Enter 0 in case all are eligible</i>
+              <button  formaction="/postmarks" class="btn btn-danger">Post Marks</button>
 							</div>
 						</div>
 					</div>
