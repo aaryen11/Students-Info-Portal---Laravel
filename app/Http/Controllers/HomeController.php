@@ -136,7 +136,7 @@ class HomeController extends Controller
                     $studentdata->password= Hash::make($email);
                     $studentdata->save();
             }
-            DB::table('users')->where('usertype', '2')->update(['profile' => "profile.png"]);
+            DB::table('users')->where('profile',null)->update(['profile' => "profile.png"]);
             return redirect()->back()->with('status','Successfully Added Entries!');
             }
             else{
