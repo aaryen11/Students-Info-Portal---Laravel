@@ -68,7 +68,8 @@
 								<h6 class="mb-0">Avatar</h6>
 							</div>
 							<div class="col-sm-9 text-secondary">
-								<input type="file" class="form-control" name="profile" value="{{(Auth::user()->profile)}}">
+								<input type="file" class="form-control" name="profile" value="{{(Auth::user()->profile)}}"><br>
+								<small><i>Max Size - 150KB</i> | <i>Supported Formats - png,jpeg,bmp</i></small>
 							</div>
 						</div>
 						<div class="row mb-3">
