@@ -136,6 +136,7 @@ class HomeController extends Controller
                     $studentdata->password= Hash::make($email);
                     $studentdata->save();
             }
+            DB::table('users')->where('usertype', '2')->update(['profile' => "profile.png"]);
             return redirect()->back()->with('status','Successfully Added Entries!');
             }
             else{
@@ -155,22 +156,65 @@ class HomeController extends Controller
     public function update(Request $request)
     {
         $id = Auth::user()->email;
-        $data = [
-         'name' => $request->get('name'),
-         'university_roll_no' => $request->get('university_roll_no'),
-         'email' => $request->get('email'),
-         'official_email_id' => $request->get('oemail'),
-         'phone' => $request->get('phone'),
-         'github_profile' => $request->get('github'),
-         'cgpa' => $request->get('cgpa'),
-         'XII' => $request->get('12th'),
-         'X' => $request->get('10th'),
-         'course' => $request->get('course'),
-         'branch' => $request->get('branch'),
-         'phone' => $request->get('phone'),
-         'section' => $request->get('section'),
-         'updated_at' => date('Y-m-d H:i:s')
-        ];
+        if ($request->hasFile('profile')) {
+                $v = Validator::make($request->all(), [
+                    'profile' => 'max:150',
+                    'profile' => 'mimes:jpeg,bmp,png',
+                ]);
+            if($v->passes()){
+                $image = $request->file('profile');
+                $iname = strtolower($request->get('email'));
+                $name = $iname.time().'.'.$image->getClientOriginalExtension();
+                $destinationPath = public_path('/profileimages');
+                $image->move($destinationPath, $name);
+                $pname = 'profileimages/'.$name;
+                $oname = DB::table('users')->where('email',$id)->pluck('profile');
+                if($oname[0]!="profile.png"){
+                    if (file_exists($oname[0])) {
+                    @unlink($oname[0]);
+                    }
+                }
+                $data = [
+                    'name' => $request->get('name'),
+                    'profile' => $pname,
+                    'university_roll_no' => $request->get('university_roll_no'),
+                    'email' => $request->get('email'),
+                    'official_email_id' => $request->get('oemail'),
+                    'phone' => $request->get('phone'),
+                    'github_profile' => $request->get('github'),
+                    'cgpa' => $request->get('cgpa'),
+                    'XII' => $request->get('12th'),
+                    'X' => $request->get('10th'),
+                    'course' => $request->get('course'),
+                    'branch' => $request->get('branch'),
+                    'phone' => $request->get('phone'),
+                    'section' => $request->get('section'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ];
+            }
+            else{
+                return redirect()->back()->with("success","File error");
+            }
+
+        }
+        else{
+            $data = [
+            'name' => $request->get('name'),
+            'university_roll_no' => $request->get('university_roll_no'),
+            'email' => $request->get('email'),
+            'official_email_id' => $request->get('oemail'),
+            'phone' => $request->get('phone'),
+            'github_profile' => $request->get('github'),
+            'cgpa' => $request->get('cgpa'),
+            'XII' => $request->get('12th'),
+            'X' => $request->get('10th'),
+            'course' => $request->get('course'),
+            'branch' => $request->get('branch'),
+            'phone' => $request->get('phone'),
+            'section' => $request->get('section'),
+            'updated_at' => date('Y-m-d H:i:s')
+            ];
+        }
      DB::table('users')->where("email",$id)->update($data);
      return redirect()->back()->with("success","Updated");
     }

@@ -16,7 +16,7 @@
               <div class="card pt-3 pb-2">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                      <img src="{{ asset('profile.png') }}" alt="Profile" class="rounded-circle" width="150">
+                      <img src="{{(Auth::user()->profile)}}" alt="Profile" class="rounded-circle" width="150">
                     <div class="mt-3">
                       <h4>{{(Auth::user()->name)}}</h4>
                       <p class="text-secondary mb-1">

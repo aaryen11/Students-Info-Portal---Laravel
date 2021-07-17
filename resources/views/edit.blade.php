@@ -16,7 +16,7 @@
               <div class="card pt-3 pb-2">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                      <img src="{{ asset('profile.png') }}" alt="Profile" class="rounded-circle" width="150">
+                      <img src="{{(Auth::user()->profile)}}" alt="Profile" class="rounded-circle" width="150">
                     <div class="mt-3">
                       <h4>{{(Auth::user()->name)}}</h4>
                       <p class="text-secondary mb-1">
@@ -60,9 +60,17 @@
             </div>
 			<div class="col-lg-8">
 				<div class="card">
-				<form action="/save" method="POST">
+				<form action="/save" method="POST"  enctype="multipart/form-data">
       			@csrf
 					<div class="card-body p-4">
+					<div class="row mb-3">
+							<div class="col-sm-3">
+								<h6 class="mb-0">Avatar</h6>
+							</div>
+							<div class="col-sm-9 text-secondary">
+								<input type="file" class="form-control" name="profile" value="{{(Auth::user()->profile)}}">
+							</div>
+						</div>
 						<div class="row mb-3">
 							<div class="col-sm-3">
 								<h6 class="mb-0">Name</h6>
